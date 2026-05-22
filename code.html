@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html class="dark scroll-smooth" lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Skateboard Boy Gaming Academy | 10堂課打造你的專屬滑板遊戲</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0B;
+            color: #e5e2e3;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Global Texture Animation */
+        @keyframes grain-pulse {
+            0%, 100% { opacity: 0.04; }
+            50% { opacity: 0.08; }
+        }
+        .film-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDSk2tURjhIDW3Gz2AgLx95RBLZdqL4BYPPhf42_5h8vVhZBmmvIFvKiNR30UdGnjUIaLx0KlcqNvKdjmx4YenE-af6dmgeb28tRtvJOZI1yRUDdKwxg79J-sT4c1sLoKV6upTfjUIu6nbK6YMYvU_nWUu4o2zfheXRcYhyidkVawVzY9pwXiW2x9ithOOkgJx_ka8rrejE1qdnQz3x6ANW9nXmhrP8IHuNWyPB3wzuR7-jcYjGiA0i7yN0pZoTZauoRPaSLDSX_MBM);
+            animation: grain-pulse 4s ease-in-out infinite;
+        }
+
+        .vertical-guide {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 0;
+        }
+
+        /* Entrance Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Float Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .hero-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Button Shimmer */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+
+        /* Nav Active State Glow */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active-link {
+            color: #39FF14;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            border-bottom: 2px solid #39FF14;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 30px -5px rgba(57, 255, 20, 0.15);
+            border-color: rgba(57, 255, 20, 0.4);
+        }
+
+        .corner-bracket {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: #39FF14;
+        }
+        .top-left { top: -2px; left: -2px; border-top: 2px solid; border-left: 2px solid; }
+        .top-right { top: -2px; right: -2px; border-top: 2px solid; border-right: 2px solid; }
+        .bottom-left { bottom: -2px; left: -2px; border-bottom: 2px solid; border-left: 2px solid; }
+        .bottom-right { bottom: -2px; right: -2px; border-bottom: 2px solid; border-right: 2px solid; }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .hero-float, .btn-shimmer::after, .glass-card, .film-grain, body {
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "glass-stroke": "rgba(255, 255, 255, 0.12)",
+                        "tertiary": "#ecfdff",
+                        "secondary-fixed": "#ffdbcf",
+                        "outline": "#85967c",
+                        "tertiary-fixed": "#7df4ff",
+                        "secondary-container": "#fa5c1c",
+                        "on-surface": "#e5e2e3",
+                        "surface-container-low": "#1c1b1c",
+                        "on-secondary-container": "#511500",
+                        "on-secondary-fixed-variant": "#832700",
+                        "on-primary": "#053900",
+                        "surface-container-highest": "#353436",
+                        "primary": "#efffe3",
+                        "on-secondary": "#5c1900",
+                        "on-primary-container": "#107100",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#00dbe9",
+                        "surface-container": "#201f20",
+                        "outline-variant": "#3c4b35",
+                        "tertiary-container": "#55f2ff",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#00363a",
+                        "surface-container-high": "#2a2a2b",
+                        "primary-container": "#39ff14",
+                        "background": "#131314",
+                        "on-surface-variant": "#baccb0",
+                        "primary-fixed-dim": "#2ae500",
+                        "inverse-on-surface": "#313031",
+                        "surface-bright": "#3a393a",
+                        "on-primary-fixed-variant": "#095300",
+                        "on-error": "#690005",
+                        "surface-void": "#0A0A0B",
+                        "surface-tint": "#2ae500",
+                        "surface-variant": "#353436",
+                        "passion-orange": "#FF5F1F",
+                        "cyber-cyan": "#00F0FF",
+                        "primary-fixed": "#79ff5b",
+                        "on-background": "#e5e2e3",
+                        "secondary": "#ffb59c",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-tertiary-fixed": "#002022",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "on-tertiary-container": "#006c73",
+                        "surface-dim": "#131314",
+                        "on-secondary-fixed": "#390c00",
+                        "inverse-primary": "#106e00",
+                        "error": "#ffb4ab",
+                        "neon-aurora": "#39FF14",
+                        "inverse-surface": "#e5e2e3",
+                        "surface": "#131314",
+                        "on-primary-fixed": "#022100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "slice-reveal": "25%",
+                        "margin-mobile": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "numeral-xl": ["Space Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "label-tech": ["JetBrains Mono"],
+                        "display-lg": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "numeral-xl": ["64px", {"lineHeight": "64px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-tech": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-body-md text-body-md selection:bg-neon-aurora selection:text-surface-void">
+<div class="film-grain"></div>
+<!-- Background Guides -->
+<div class="vertical-guide left-[64px] hidden md:block"></div>
+<div class="vertical-guide left-[33%] hidden md:block"></div>
+<div class="vertical-guide left-[66%] hidden md:block"></div>
+<div class="vertical-guide right-[64px] hidden md:block"></div>
+<!-- TopNavBar -->
+<nav class="bg-surface/60 backdrop-blur-xl dark:bg-surface-void/60 docked full-width top-0 sticky z-50 border-b border-glass-stroke shadow-[0_0_15px_rgba(57,255,20,0.1)] flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-full">
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-neon-aurora tracking-tighter cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        Skateboard Boy
+    </div>
+<div class="hidden md:flex gap-8">
+<a class="nav-link text-on-surface-variant font-label-tech hover:text-neon-aurora transition-colors" href="#values">Core Values</a>
+<a class="nav-link text-on-surface-variant font-label-tech hover:text-neon-aurora transition-colors" href="#learning-path">Learning Path</a>
+<a class="nav-link text-on-surface-variant font-label-tech hover:text-neon-aurora transition-colors" href="#teaching">Teaching</a>
+<a class="nav-link text-on-surface-variant font-label-tech hover:text-neon-aurora transition-colors" href="#faq">FAQ</a>
+</div>
+<button class="btn-shimmer relative overflow-hidden bg-primary-container text-on-primary px-6 py-2 font-label-tech rounded-lg hover:bg-neon-aurora transition-all scale-100 hover:scale-105 duration-200 ease-in-out">
+        Enroll Now
+    </button>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full min-h-screen pt-32 pb-24 overflow-hidden flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop bg-surface-void" id="hero">
+<style>
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(1000%); }
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            5% { opacity: 0.8; }
+            15% { opacity: 0.9; }
+            25% { opacity: 0.7; }
+        }
+        .scanline-effect {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 15px;
+            background: linear-gradient(to bottom, transparent, rgba(57, 255, 20, 0.3), transparent);
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .glitch-text {
+            animation: flicker 4s infinite alternate;
+        }
+        .hero-banner-frame {
+            position: relative;
+            padding: 4px;
+            background: linear-gradient(45deg, #39FF14, transparent, #FF5F1F);
+            border-radius: 1rem;
+            box-shadow: 0 0 40px rgba(57, 255, 20, 0.1);
+        }
+    </style>
+<div class="z-20 text-center max-w-5xl mb-12 reveal">
+<span class="font-label-tech text-neon-aurora tracking-[0.3em] mb-4 block uppercase opacity-80">Skateboard Boy Academy Presents</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-[64px] md:leading-[1.1] text-on-surface mb-6 glitch-text">
+            滑板小子程式冒險：<br/>
+<span class="text-neon-aurora">10堂課打造你的專屬滑板遊戲</span>
+</h1>
+<p class="font-body-md text-headline-lg-mobile md:text-headline-lg text-on-surface-variant max-w-3xl mx-auto">
+            專為大班至國小三年級設計。結合 OctoStudio 創意程式與滑板運動，從零打造專屬遊戲。
+        </p>
+</div>
+<div class="relative w-full max-w-5xl z-10 hero-banner-frame hero-float reveal" style="transition-delay: 200ms;">
+<div class="absolute inset-0 bg-surface-void rounded-[0.9rem] overflow-hidden">
+<div class="scanline-effect"></div>
+<img alt="Skateboard Boy Hero" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCDe9yKsAoR0pQNpg3nCySk1T58BtPSoSr_59Y4dXrS8XJI20mXQkn_0fVeywPoF7mkxHhrkISWgM5VAwehiJFumLgK0pEO0FaUU0LliUf4Wcb3-YujIbkMriv2pN-rD9x-iZniQfTEsJHgDhpMytB9izQa1nmVSYZM6gmdr1CSCx8ccZAcFWVPbWrcaxquQvsPc8JVm7cTScuxWz3BSC4oR-pYQcOdxFMwqtQOWnkYNW_bHo6hH9MqFGqnxCnXvS0eXWrIJ3gqH_c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-void/60 to-transparent"></div>
+</div>
+<img alt="Skateboard Boy Hero" class="relative w-full h-auto object-cover rounded-[0.9rem] border border-glass-stroke" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCDe9yKsAoR0pQNpg3nCySk1T58BtPSoSr_59Y4dXrS8XJI20mXQkn_0fVeywPoF7mkxHhrkISWgM5VAwehiJFumLgK0pEO0FaUU0LliUf4Wcb3-YujIbkMriv2pN-rD9x-iZniQfTEsJHgDhpMytB9izQa1nmVSYZM6gmdr1CSCx8ccZAcFWVPbWrcaxquQvsPc8JVm7cTScuxWz3BSC4oR-pYQcOdxFMwqtQOWnkYNW_bHo6hH9MqFGqnxCnXvS0eXWrIJ3gqH_c"/>
+</div>
+<div class="flex flex-col md:flex-row gap-8 mt-16 z-20 reveal" style="transition-delay: 400ms;">
+<button class="btn-shimmer group relative px-12 py-5 bg-neon-aurora text-on-primary font-bold rounded-xl overflow-hidden transition-all hover:shadow-[0_0_40px_rgba(57,255,20,0.4)] scale-105 active:scale-95">
+<span class="relative z-10 flex items-center gap-2">
+                立即預約體驗
+                <span class="material-symbols-outlined font-bold">bolt</span>
+</span>
+</button>
+<button class="flex items-center gap-3 px-12 py-5 border-2 border-passion-orange text-passion-orange font-bold rounded-xl hover:bg-passion-orange/10 transition-all active:scale-95">
+<span>課程介紹影片</span>
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</header>
+<!-- Core Values Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop relative" id="values">
+<div class="mb-16 reveal">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-2">五大課程核心價值</h2>
+<div class="w-24 h-1 bg-neon-aurora"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-card p-8 group reveal">
+<div class="top-left corner-bracket"></div><div class="top-right corner-bracket"></div>
+<div class="font-label-tech text-neon-aurora/30 absolute top-4 right-4">01</div>
+<span class="material-symbols-outlined text-4xl text-neon-aurora mb-6 block" data-icon="skateboarding">skateboarding</span>
+<h3 class="font-headline-lg text-on-surface mb-4">IP驅動成長</h3>
+<p class="text-on-surface-variant">以角色成長為主軸，讓孩子在編寫程式的同時體驗滑板角色的進步。</p>
+</div>
+<div class="glass-card p-8 group md:col-span-2 reveal" style="transition-delay: 100ms;">
+<div class="top-left corner-bracket"></div><div class="top-right corner-bracket"></div>
+<div class="font-label-tech text-neon-aurora/30 absolute top-4 right-4">02</div>
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="flex-1">
+<span class="material-symbols-outlined text-4xl text-passion-orange mb-6 block" data-icon="terminal">terminal</span>
+<h3 class="font-headline-lg text-on-surface mb-4">產品驅動學習 (Mini Project)</h3>
+<p class="text-on-surface-variant">每次課程完都能帶走一個包含完整、會動、可以玩的滑板 mini project。</p>
+</div>
+<div class="w-full md:w-64 aspect-video bg-surface-void rounded-xl border border-glass-stroke flex items-center justify-center group-hover:border-passion-orange/40 transition-colors">
+<span class="text-label-tech text-on-surface-variant">Game Preview</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 group reveal" style="transition-delay: 200ms;">
+<div class="top-left corner-bracket"></div><div class="top-right corner-bracket"></div>
+<div class="font-label-tech text-neon-aurora/30 absolute top-4 right-4">03</div>
+<span class="material-symbols-outlined text-4xl text-cyber-cyan mb-6 block" data-icon="diversity_3">diversity_3</span>
+<h3 class="font-headline-lg text-on-surface mb-4">文化深度沉浸</h3>
+<p class="text-on-surface-variant">將滑板文化術語與精神融入教學，讓 Coding 不再只是枯燥的指令。</p>
+</div>
+<div class="glass-card p-8 group reveal" style="transition-delay: 300ms;">
+<div class="top-left corner-bracket"></div><div class="top-right corner-bracket"></div>
+<div class="font-label-tech text-neon-aurora/30 absolute top-4 right-4">04</div>
+<span class="material-symbols-outlined text-4xl text-on-secondary-container mb-6 block" data-icon="account_tree">account_tree</span>
+<h3 class="font-headline-lg text-on-surface mb-4">彈性分層教學</h3>
+<p class="text-on-surface-variant">針對初階與中階學生，設計「基礎版」與「進階版」的差異化任務。</p>
+</div>
+<div class="glass-card p-8 group reveal" style="transition-delay: 400ms;">
+<div class="top-left corner-bracket"></div><div class="top-right corner-bracket"></div>
+<div class="font-label-tech text-neon-aurora/30 absolute top-4 right-4">05</div>
+<span class="material-symbols-outlined text-4xl text-neon-aurora mb-6 block" data-icon="bolt" data-weight="fill">bolt</span>
+<h3 class="font-headline-lg text-on-surface mb-4">體感互動創新</h3>
+<p class="text-on-surface-variant">結合平板陀螺儀與體感偵測，打造真實的飛行與平衡操作體驗。</p>
+</div>
+</div>
+</section>
+<!-- Learning Path Section -->
+<section class="py-24 bg-surface-container-lowest relative overflow-hidden" id="learning-path">
+<div class="px-margin-mobile md:px-margin-desktop mb-16 relative z-10 reveal">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-2">10堂課學習路徑</h2>
+<p class="font-body-md text-on-surface-variant">從基礎造型到多人互動，一步步掌握遊戲開發核心</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-glass-stroke">
+<!-- Cards repeat the reveal class with incremental delay logic handled by JS or just classes -->
+<div class="p-8 border-r border-b border-glass-stroke group hover:bg-neon-aurora/5 transition-all reveal">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-tech text-neon-aurora">LVL 01</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-neon-aurora transition-colors" data-icon="palette">palette</span>
+</div>
+<h4 class="font-headline-lg text-on-surface mb-2">認識角色與造型設計</h4>
+<p class="text-label-tech text-on-surface-variant mb-6 uppercase">Project: 自我介紹動畫</p>
+<div class="overflow-hidden rounded-lg border border-glass-stroke mb-4">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCydasDrurwpnIORiFiCgc_wyCfuHTx9k2BfLMorpCjo1RV5JHsk0TnMPD1GrORI2PjEuJnARYWD06A9Jvnuq4M8wbvaKNFcfSCUrgQrM7ifiME83e-FV3absU7MSpd1N2S4HXJQO-H-49oCTGz7JKk84V1cmz6Outyyyu0Md-R5UtsxI0EE3nuaqz2sljgKhR8ZORYk-fNdQTk_wFQYOIHr5w3mmsDOcEE48y5hwieOFFIunZpA1eKHzc5oUBAEuCEM0uy2yyxBgfL"/>
+</div>
+</div>
+<div class="p-8 border-r border-b border-glass-stroke group hover:bg-neon-aurora/5 transition-all reveal">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-tech text-neon-aurora">LVL 02</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-neon-aurora transition-colors" data-icon="keyboard_double_arrow_up">keyboard_double_arrow_up</span>
+</div>
+<h4 class="font-headline-lg text-on-surface mb-2">滑行與跳躍</h4>
+<p class="text-label-tech text-on-surface-variant mb-6 uppercase">Project: 動作模擬器</p>
+<div class="overflow-hidden rounded-lg border border-glass-stroke mb-4">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCydasDrurwpnIORiFiCgc_wyCfuHTx9k2BfLMorpCjo1RV5JHsk0TnMPD1GrORI2PjEuJnARYWD06A9Jvnuq4M8wbvaKNFcfSCUrgQrM7ifiME83e-FV3absU7MSpd1N2S4HXJQO-H-49oCTGz7JKk84V1cmz6Outyyyu0Md-R5UtsxI0EE3nuaqz2sljgKhR8ZORYk-fNdQTk_wFQYOIHr5w3mmsDOcEE48y5hwieOFFIunZpA1eKHzc5oUBAEuCEM0uy2yyxBgfL"/>
+</div>
+</div>
+<div class="p-8 border-r border-b border-glass-stroke group hover:bg-neon-aurora/5 transition-all reveal">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-tech text-neon-aurora">LVL 03</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-neon-aurora transition-colors" data-icon="warning">warning</span>
+</div>
+<h4 class="font-headline-lg text-on-surface mb-2">障礙物閃避</h4>
+<p class="text-label-tech text-on-surface-variant mb-6 uppercase">Project: 街頭遊戲</p>
+<div class="overflow-hidden rounded-lg border border-glass-stroke mb-4">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCydasDrurwpnIORiFiCgc_wyCfuHTx9k2BfLMorpCjo1RV5JHsk0TnMPD1GrORI2PjEuJnARYWD06A9Jvnuq4M8wbvaKNFcfSCUrgQrM7ifiME83e-FV3absU7MSpd1N2S4HXJQO-H-49oCTGz7JKk84V1cmz6Outyyyu0Md-R5UtsxI0EE3nuaqz2sljgKhR8ZORYk-fNdQTk_wFQYOIHr5w3mmsDOcEE48y5hwieOFFIunZpA1eKHzc5oUBAEuCEM0uy2yyxBgfL"/>
+</div>
+</div>
+<div class="p-8 border-r border-b border-glass-stroke group hover:bg-neon-aurora/5 transition-all reveal">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-tech text-neon-aurora">LVL 07</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-neon-aurora transition-colors" data-icon="flight">flight</span>
+</div>
+<h4 class="font-headline-lg text-on-surface mb-2">未來飛行滑板 (3D感)</h4>
+<p class="text-label-tech text-on-surface-variant mb-6 uppercase">Project: 3D飛行冒險</p>
+<div class="overflow-hidden rounded-lg border border-glass-stroke mb-4">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYvu8ikCRFH3HXibCHpS7jQn1REj6jgf7Kjj5QPa7dexNquD3qXmvl_AG3D6PtU1UxsNU5qz59KJn_JE2ZVxRwHUxHM3oJYES1QMYWKzMQ9VaqcRdmUc1f0nQoxjM2AUan2wPVPgdCa81X7eUDWx8x3W83aRxcetgC6g9TUwUm8mV-IAuSWCLdVPFuLvrd01U4_magJ0TEj-wfq5Y0MU9aJdOwwQ19reuEzDqyixSaKrRUf8-5SjWEhGmSUjnkH2QwFJx20xO6MuXS"/>
+</div>
+</div>
+<div class="p-8 border-r border-b border-glass-stroke group hover:bg-neon-aurora/5 transition-all reveal">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-tech text-neon-aurora">LVL 08</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-neon-aurora transition-colors" data-icon="sports_esports">sports_esports</span>
+</div>
+<h4 class="font-headline-lg text-on-surface mb-2">多人對抗 (Tic Tac)</h4>
+<p class="text-label-tech text-on-surface-variant mb-6 uppercase">Project: 競賽對戰</p>
+<div class="overflow-hidden rounded-lg border border-glass-stroke mb-4">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYvu8ikCRFH3HXibCHpS7jQn1REj6jgf7Kjj5QPa7dexNquD3qXmvl_AG3D6PtU1UxsNU5qz59KJn_JE2ZVxRwHUxHM3oJYES1QMYWKzMQ9VaqcRdmUc1f0nQoxjM2AUan2wPVPgdCa81X7eUDWx8x3W83aRxcetgC6g9TUwUm8mV-IAuSWCLdVPFuLvrd01U4_magJ0TEj-wfq5Y0MU9aJdOwwQ19reuEzDqyixSaKrRUf8-5SjWEhGmSUjnkH2QwFJx20xO6MuXS"/>
+</div>
+</div>
+<div class="p-8 border-r border-b border-glass-stroke group hover:bg-neon-aurora/5 transition-all reveal">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-tech text-neon-aurora">LVL 10</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-neon-aurora transition-colors" data-icon="emoji_events">emoji_events</span>
+</div>
+<h4 class="font-headline-lg text-on-surface mb-2">作品發表展示日</h4>
+<p class="text-label-tech text-on-surface-variant mb-6 uppercase">Final Milestone</p>
+<div class="overflow-hidden rounded-lg border border-glass-stroke mb-4">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkmbrRwHKtiMkHYckC66JbKxh8ciIgMaEz_Jw227aHflEJaJy23CPVoXwiTcB9GKI2X9UTK9YU4GwEzZHrUsGkP9PuV1bdZrFdj7sYAyOdFF1jmaQxJSb24jM9ZqLRjsyyyRZoGfQmXrdRAN8rYBiZvLkAuSSjSPrMzq9XU5P9ms7jXHyW1lP7t2T1QmVn9uzpctocbGqQ1puzE_Ui2fisLU9AVrCiBjpj7yLPcseecNUSRqBcl1vPmUDukutt9nxLlYzQ4quj_v0h"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Teaching Highlights Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-void relative" id="teaching">
+<div class="mb-16 reveal">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-2">教學亮點：不只是 Coding</h2>
+<div class="w-24 h-1 bg-passion-orange"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-8 group flex flex-col reveal">
+<div class="top-left corner-bracket"></div><div class="top-right corner-bracket"></div>
+<div class="flex items-center justify-center w-20 h-20 rounded-2xl bg-surface-container border border-glass-stroke mb-8 group-hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] transition-all">
+<span class="material-symbols-outlined text-5xl text-neon-aurora" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-headline-lg text-on-surface mb-6">電腦相關的基本知識</h3>
+<p class="text-on-surface-variant flex-grow">課程融入電腦相關知識的介紹，例如：電腦如何運作、如何執行程式。除了實作也能了解一點背後的原理。</p>
+<div class="mt-8 pt-6 border-t border-glass-stroke">
+<span class="font-label-tech text-neon-aurora">SYSTEM ARCHITECTURE</span>
+</div>
+</div>
+<div class="glass-card p-8 group flex flex-col reveal" style="transition-delay: 150ms;">
+<div class="top-left corner-bracket !border-passion-orange"></div><div class="top-right corner-bracket !border-passion-orange"></div>
+<div class="flex items-center justify-center w-20 h-20 rounded-2xl bg-surface-container border border-glass-stroke mb-8 group-hover:shadow-[0_0_20px_rgba(255,95,31,0.3)] transition-all">
+<span class="material-symbols-outlined text-5xl text-passion-orange" data-icon="layers">layers</span>
+</div>
+<h3 class="font-headline-lg text-on-surface mb-6">彈性分層教學</h3>
+<p class="text-on-surface-variant flex-grow">針對初階與中階的學生，設計「基礎版」與「進階版」的差異化任務，確保每位孩子都能挑戰自我。</p>
+<div class="mt-8 pt-6 border-t border-glass-stroke">
+<span class="font-label-tech text-passion-orange">ADAPTIVE LEARNING</span>
+</div>
+</div>
+<div class="glass-card p-8 group flex flex-col reveal" style="transition-delay: 300ms;">
+<div class="top-left corner-bracket !border-cyber-cyan"></div><div class="top-right corner-bracket !border-cyber-cyan"></div>
+<div class="flex items-center justify-center w-20 h-20 rounded-2xl bg-surface-container border border-glass-stroke mb-8 group-hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all">
+<span class="material-symbols-outlined text-5xl text-cyber-cyan" data-icon="timer">timer</span>
+</div>
+<h3 class="font-headline-lg text-on-surface mb-6">黃金比例教學節奏</h3>
+<p class="text-on-surface-variant mb-8">採用 25% : 50% : 25% 的比例，確保學習留存率最大化。</p>
+<div class="space-y-4 mb-4">
+<div class="h-10 w-full flex rounded-full overflow-hidden border border-glass-stroke p-1">
+<div class="h-full bg-neon-aurora/80 flex items-center justify-center text-[10px] font-bold text-on-primary transition-all duration-1000 w-0" id="ratio1" style="width: 25%">25%</div>
+<div class="h-full bg-passion-orange/80 flex items-center justify-center text-[10px] font-bold text-white transition-all duration-1000 w-0" id="ratio2" style="width: 50%">50%</div>
+<div class="h-full bg-cyber-cyan/80 flex items-center justify-center text-[10px] font-bold text-on-tertiary transition-all duration-1000 w-0" id="ratio3" style="width: 25%">25%</div>
+</div>
+<div class="grid grid-cols-3 text-[10px] font-label-tech text-on-surface-variant">
+<div class="text-center">20m 觀念</div>
+<div class="text-center">40m 實作</div>
+<div class="text-center">20m 分享</div>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-glass-stroke">
+<span class="font-label-tech text-cyber-cyan">RETENTION MAXIMIZED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop" id="faq">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-12 text-center reveal">家長常見問題</h2>
+<div class="space-y-4">
+<details class="glass-card group cursor-pointer overflow-hidden reveal">
+<summary class="flex justify-between items-center p-6 list-none hover:bg-white/5 transition-all">
+<span class="font-headline-lg text-on-surface">孩子需要自備平板嗎？</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
+                    教室備有最新型 iPad 與專用觸控筆供上課使用，無需自備。
+                </div>
+</details>
+<details class="glass-card group cursor-pointer overflow-hidden reveal" style="transition-delay: 100ms;">
+<summary class="flex justify-between items-center p-6 list-none hover:bg-white/5 transition-all">
+<span class="font-headline-lg text-on-surface">完全沒有程式基礎可以上嗎？</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
+                    絕對可以！我們使用 OctoStudio 圖形化積木程式，就像玩積木一樣直覺，旨在培養逻辑思考而非死記指令。
+                </div>
+</details>
+<details class="glass-card group cursor-pointer overflow-hidden reveal" style="transition-delay: 200ms;">
+<summary class="flex justify-between items-center p-6 list-none hover:bg-white/5 transition-all">
+<span class="font-headline-lg text-on-surface">需要會溜滑板才能參加嗎？</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
+                    不需要！本課程側重於「遊戲開發」與「體感偵測設計」。我們會透過影片與動作示範讓孩子理解滑板物理特性。
+                </div>
+</details>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="py-16 border-y border-glass-stroke overflow-hidden">
+<div class="px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-12 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700 reveal">
+<span class="font-label-tech tracking-widest text-on-surface-variant">TRUSTED BY THE GLOBAL CREATIVE TECH COMMUNITY</span>
+<div class="flex flex-wrap justify-center gap-12">
+<span class="font-display-lg text-headline-lg text-on-surface hover:text-neon-aurora transition-colors">LEGO</span>
+<span class="font-display-lg text-headline-lg text-on-surface hover:text-neon-aurora transition-colors">Scratch</span>
+<span class="font-display-lg text-headline-lg text-on-surface hover:text-neon-aurora transition-colors">MIT Media Lab</span>
+<span class="font-display-lg text-headline-lg text-on-surface hover:text-neon-aurora transition-colors">Vans</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-void dark:bg-surface-void full-width py-12 border-t border-glass-stroke flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop gap-gutter">
+<div class="flex flex-col gap-2 reveal">
+<div class="font-display-lg text-headline-lg text-on-surface">Skateboard Boy</div>
+<p class="text-on-surface-variant text-label-tech max-w-sm">
+            © 2024 Skateboard Boy Gaming Academy. Cross-disciplinary Game Coding Course.
+        </p>
+</div>
+<div class="flex gap-8 reveal" style="transition-delay: 200ms;">
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-passion-orange transition-colors font-label-tech" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-passion-orange transition-colors font-label-tech" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-passion-orange transition-colors font-label-tech" href="#">Discord</a>
+<a class="text-on-surface-variant hover:text-passion-orange transition-colors font-label-tech" href="#">YouTube</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-passion-orange transition-colors font-label-tech" href="#">Instagram</a>
+<a class="text-on-surface-variant hover:text-passion-orange transition-colors font-label-tech" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for Entrance Animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Scroll Spy for Navigation Active State
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section, header');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active-link');
+            if (link.getAttribute('href').includes(current) && current !== '') {
+                link.classList.add('active-link');
+            }
+        });
+    });
+
+    // Handle smooth internal navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 3D Tilt Effect for Glass Cards
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)`;
+        });
+    });
+</script>
+</body></html>
