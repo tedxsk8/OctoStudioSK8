@@ -326,7 +326,7 @@
     <header
         class="relative w-full min-h-[92vh] pt-28 pb-20 overflow-hidden flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop bg-surface-void"
         id="hero">
-        <div class="z-20 text-center max-w-5xl mb-10 reveal">
+        <div class="sr-only">
             <span class="font-label-tech text-neon-aurora tracking-[0.24em] mb-4 block uppercase opacity-80">OctoStudio
                 Skateboard Game Camp</span>
             <h1
@@ -335,9 +335,6 @@
             </h1>
             <p class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-neon-aurora mb-6">
                 10堂課打造你的第一款滑板遊戲</p>
-            <p class="font-body-md text-lg md:text-xl text-on-surface-variant max-w-3xl mx-auto leading-8">
-                玩遊戲很簡單，創造自己的遊戲更有趣。結合滑板運動 × OctoStudio × 遊戲設計，讓孩子從玩家變成創作者。
-            </p>
         </div>
         <div class="relative w-full max-w-5xl z-10 hero-banner-frame hero-float reveal"
             style="transition-delay: 160ms;">
@@ -376,7 +373,7 @@
             <div class="mb-12 reveal">
                 <span class="font-label-tech text-neon-aurora uppercase">Why This Camp</span>
                 <h2 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mt-3 mb-4">孩子喜歡玩遊戲，<br
-                        class="md:hidden" />那麼有沒有想過自己做一款？</h2>
+                        class="md:hidden" />那麼有沒有想過自己做一個？</h2>
                 <p class="text-on-surface-variant max-w-2xl">透過遊戲設計，孩子把想法變成可互動的作品，也在過程中練習思考、嘗試與修正。</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -403,6 +400,43 @@
                         class="material-symbols-outlined text-4xl text-neon-aurora mb-5 block">draw</span>
                     <h3 class="font-headline-lg text-on-surface mb-3">數位創作</h3>
                     <p class="text-on-surface-variant">把平板變成孩子自己的遊戲工作室。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-margin-mobile md:px-margin-desktop bg-surface-void relative border-y border-glass-stroke/10" id="why-octostudio">
+            <div class="max-w-4xl mx-auto reveal">
+                <span class="font-label-tech text-cyber-cyan uppercase">About The Tool</span>
+                <h2 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mt-3 mb-8">為什麼選擇 OctoStudio？</h2>
+                
+                <div class="glass-card p-8 md:p-12 relative overflow-hidden">
+                    <div class="top-left corner-bracket !border-cyber-cyan"></div>
+                    <div class="bottom-right corner-bracket !border-cyber-cyan"></div>
+
+                    <div class="flex flex-col gap-6 text-lg md:text-xl leading-relaxed text-on-surface-variant relative z-10">
+                        <p>
+                            <strong class="text-neon-aurora">OctoStudio</strong> 是 MIT 專為兒童設計的程式創作工具，透過積木式操作就能製作動畫與遊戲。
+                        </p>
+                        <p>
+                            許多國小三、四年級開始接觸 Scratch，而 OctoStudio 與 Scratch 採用相似的核心概念。
+                        </p>
+                        <p>
+                            孩子若先接觸 OctoStudio，未來學習 Scratch 時往往能更快理解程式邏輯與遊戲設計概念。
+                        </p>
+                        <p class="text-on-surface font-semibold pt-4 border-t border-glass-stroke/20">
+                            我們希望孩子在有趣的創作過程中，先建立自信與興趣，再逐步進入更完整的程式學習世界。
+                        </p>
+                        <div class="pt-4">
+                            <a class="inline-flex items-center justify-center gap-3 px-8 py-3 border-2 border-cyber-cyan text-cyber-cyan font-bold rounded-xl hover:bg-cyber-cyan/10 transition-all active:scale-95 text-base md:text-lg"
+                                href="https://youtu.be/qx0TT4iOfYU?si=vthCwAUhc8rjQ7Us" target="_blank" rel="noopener noreferrer">
+                                <span>觀看 OctoStudio 介紹影片</span>
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none">
+                        <span class="material-symbols-outlined text-[200px] text-cyber-cyan">school</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -656,11 +690,59 @@
                     <details class="glass-card group cursor-pointer overflow-hidden reveal">
                         <summary
                             class="flex justify-between items-center gap-4 p-6 list-none hover:bg-white/5 transition-all">
-                            <span class="font-headline-lg text-on-surface">沒有程式基礎可以嗎？</span><span
+                            <span class="font-headline-lg text-on-surface">什麼是OctoStudio？</span><span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
                         </summary>
-                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">完全可以。課程使用 OctoStudio
-                            圖形化的積木程式介面，孩子不用打字，也能動動手指，用拖拉程式積木堆疊的方式完成作品，在未來可以完美銜接國小三四年級的Scratch課程。</div>
+                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
+                            OctoStudio 是由美國麻省理工學院（MIT Media Lab）團隊開發的兒童程式創作工具，專門為 5～11 歲孩子設計。透過拖拉積木的方式，孩子不需要打程式碼，就能創作動畫、互動故事和小遊戲。相較於一般程式學習，OctoStudio 更重視創意表達與作品創作，讓孩子能在短時間內獲得成就感，建立對程式設計的興趣與信心。
+                        </div>
+                    </details>
+                    <details class="glass-card group cursor-pointer overflow-hidden reveal">
+                        <summary
+                            class="flex justify-between items-center gap-4 p-6 list-none hover:bg-white/5 transition-all">
+                            <span class="font-headline-lg text-on-surface">為什麼選擇 OctoStudio，而不是直接學 Scratch？</span><span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                        </summary>
+                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke space-y-4">
+                            <p class="mt-4">OctoStudio 可以視為 Scratch 的入門版本，但操作方式更直覺、更適合低年級孩子。</p>
+                            
+                            <div class="space-y-2">
+                                <p class="text-on-surface font-semibold">在課程中，孩子可以逐步建立：</p>
+                                <ul class="list-disc ml-5 space-y-1 marker:text-neon-aurora">
+                                    <li>邏輯思考能力</li>
+                                    <li>程式事件與流程概念</li>
+                                    <li>問題解決能力</li>
+                                    <li>創意表達能力</li>
+                                </ul>
+                            </div>
+
+                            <p>許多國小在三、四年級開始接觸 Scratch，而 OctoStudio 與 Scratch 採用相似的積木式核心概念。若孩子先接觸 OctoStudio，未來學習 Scratch 時能更快理解：</p>
+
+                            <ul class="grid grid-cols-2 gap-2 text-sm bg-white/5 p-4 rounded-lg">
+                                <li class="flex items-center gap-2"><span class="text-cyber-cyan">●</span> 事件 (Event)</li>
+                                <li class="flex items-center gap-2"><span class="text-cyber-cyan">●</span> 重複執行 (Loop)</li>
+                                <li class="flex items-center gap-2"><span class="text-cyber-cyan">●</span> 條件判斷 (If)</li>
+                                <li class="flex items-center gap-2"><span class="text-cyber-cyan">●</span> 變數 (Variable)</li>
+                                <li class="flex items-center gap-2"><span class="text-cyber-cyan">●</span> 角色互動</li>
+                            </ul>
+
+                            <p class="italic border-l-2 border-neon-aurora pl-4 text-sm">
+                                換句話說，OctoStudio 就像是孩子進入程式世界的第一塊滑板，先建立平衡感與信心，再進一步挑戰更進階的學習。
+                            </p>
+                        </div>
+                    </details>
+                    <details class="glass-card group cursor-pointer overflow-hidden reveal">
+                        <summary
+                            class="flex justify-between items-center gap-4 p-6 list-none hover:bg-white/5 transition-all">
+                            <span class="font-headline-lg text-on-surface">孩子比較怕生或是第一次接觸程式設計，可以參加嗎？</span><span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                        </summary>
+                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
+                            <p>可以。</p>
+                            <p>課程採小班制（3～5人），老師能夠照顧每位孩子的學習狀況，並依照孩子的步調進行引導。</p>
+                            <p>如果孩子年紀較小、第一次參加課程，或需要一些時間適應新環境，我們也歡迎家長在旁陪同，一起參與孩子的創作過程。</p>
+                            <p></p>大部分孩子在熟悉環境後，都能逐漸建立信心並獨立完成作品。</p>
+                        </div>
                     </details>
                     <details class="glass-card group cursor-pointer overflow-hidden reveal">
                         <summary
@@ -668,17 +750,8 @@
                             <span class="font-headline-lg text-on-surface">需要自備設備嗎？</span><span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
                         </summary>
-                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">建議使用可安裝 OctoStudio
-                            的平板或手機。若需要協助確認設備，報名前可先聯繫我們。</div>
-                    </details>
-                    <details class="glass-card group cursor-pointer overflow-hidden reveal">
-                        <summary
-                            class="flex justify-between items-center gap-4 p-6 list-none hover:bg-white/5 transition-all">
-                            <span class="font-headline-lg text-on-surface">大班或一年級跟得上嗎？</span><span
-                                class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
-                        </summary>
-                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
-                            可以。小班制會依孩子狀況調整引導速度，重點是讓孩子敢嘗試、能完成、願意表達自己的想法。還是不放心的話，家長也可以陪同。</div>
+                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">需要，建議使用可安裝 OctoStudio
+                            的平板(Apple iPad/Android平板)或手機(螢幕較小的不建議)。若需要協助確認設備，報名前可先聯繫我們。</div>
                     </details>
                     <details class="glass-card group cursor-pointer overflow-hidden reveal">
                         <summary
@@ -704,7 +777,11 @@
                             <span class="font-headline-lg text-on-surface">擔心小孩怕生家長可以陪同嗎？</span><span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
                         </summary>
-                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">可以。前幾次上課家長可以陪同。</div>
+                        <div class="p-6 pt-0 text-on-surface-variant border-t border-glass-stroke">
+                            <p>可以。</p>
+                            <p>課程採小班制（3～5人），老師能夠照顧每位孩子的學習狀況，並依照孩子的步調進行引導。</p>
+                            <p>如果孩子年紀較小、第一次參加課程，或需要一些時間適應新環境，我們也歡迎家長在旁陪同，一起參與孩子的創作過程。</p>
+                        </div>
                     </details>
                 </div>
             </div>
@@ -728,14 +805,13 @@
                 </div>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a class="btn-shimmer relative overflow-hidden px-12 py-5 bg-neon-aurora text-on-primary font-bold rounded-xl hover:shadow-[0_0_40px_rgba(119,232,132,0.28)] transition-all text-center"
-                        href="https://forms.gle/" target="_blank" rel="noopener noreferrer">立即報名</a>
+                        href="https://forms.gle/uQtgAh6MGyCsk9RH9" target="_blank" rel="noopener noreferrer">立即報名</a>
                     <a class="px-12 py-5 border-2 border-cyber-cyan text-cyber-cyan font-bold rounded-xl hover:bg-cyber-cyan/10 transition-all text-center"
-                        href="https://line.me/R/ti/p/" target="_blank" rel="noopener noreferrer">加入 LINE 諮詢</a>
+                        href="https://lin.ee/8jTZSvY" target="_blank" rel="noopener noreferrer">加入 LINE 諮詢</a>
+                    <!--
                     <a class="px-12 py-5 border-2 border-passion-orange text-passion-orange font-bold rounded-xl hover:bg-passion-orange/10 transition-all text-center"
                         href="https://forms.gle/" target="_blank" rel="noopener noreferrer">預約體驗課</a>
-                    <a class="px-12 py-5 border-2 border-passion-orange text-passion-orange font-bold rounded-xl hover:bg-passion-orange/10 transition-all text-center"
-                        href="https://youtu.be/qx0TT4iOfYU?si=vthCwAUhc8rjQ7Us" target="_blank"
-                        rel="noopener noreferrer">OctoStudio 介紹影片</a>
+                    -->
                 </div>
             </div>
         </section>
