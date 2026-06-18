@@ -1,0 +1,12 @@
+# 說明用
+readme.md
+DESIGN.md
+
+# 備份
+code1.html
+
+# 環境變數與祕鑰 (之後若有 .env 檔案)
+.code-workspace
+
+# 備份檔案
+.zip
